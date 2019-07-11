@@ -1,6 +1,7 @@
 import React from 'react';
 import { Progress } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
+import './Timer.css';
 
 
 class Timer extends React.Component {
@@ -14,29 +15,32 @@ class Timer extends React.Component {
 
     componentDidMount() {
         setTimeout(() => {
-            const timeLeft = this.props.timeLeft - 100;
-            this.props.setTimeLeft(timeLeft);
+            const currentTime = this.props.currentTime + 100;
+            this.props.setCurrentTime(currentTime);
         }, 100);
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if(this.props.timeLeft >= 0) {
+        if(this.props.currentTime < this.state.startingTime) {
             setTimeout(() => {
-                const timeLeft = this.props.timeLeft - 10;
-                this.props.setTimeLeft(timeLeft);
-            }, 10);
+                const currentTime = this.props.currentTime + 100;
+                this.props.setCurrentTime(currentTime);
+            }, 100);
         };
 	};
 
     render() {
-        console.log(this.props.timeLeft, this.state.startingTime)
-        console.log(Math.ceil((this.props.timeLeft / this.state.startingTime) * 100))
-        return (
-        <div>
-            <Progress percent={Math.ceil((this.props.timeLeft / this.state.startingTime) * 100)} />
+        const value = Math.floor((this.props.currentTime / this.state.startingTime) * 100);
 
-            <div>Seconds: {this.props.timeLeft/1000}</div>
-        </div>
+        return (
+        <>
+            <Progress 
+            className="bar"
+            indicating
+            percent={value} />
+
+            <div>Seconds left: {(this.state.startingTime - this.props.currentTime) / 1000}</div>
+        </>
         )
     }
 };

@@ -7,22 +7,26 @@ class App extends React.Component {
         super(props);
 
         this.state = {
-            timeLeft: 360000
+            timeLeft: 2000,
+            currentTime: 0,
+            climberActivity: "Climbing"
         };
         
-        this.setTimeLeft = this.setTimeLeft.bind(this);
+        this.setCurrentTime = this.setCurrentTime.bind(this);
     };
 
     render() {
         return (
         <Timer 
             timeLeft={this.state.timeLeft} 
-            setTimeLeft={this.setTimeLeft} />
+            currentTime={this.state.currentTime}
+            setCurrentTime={this.setCurrentTime} 
+            climberActivity={this.state.climberActivity} />
         );
     };
 
-    setTimeLeft = (timeLeft) => {
-        this.setState({timeLeft: timeLeft});
+    setCurrentTime = (currentTime) => {
+        this.setState({currentTime: currentTime});
     }
 };
 
