@@ -9,7 +9,7 @@ class Timer extends React.Component {
         super(props);
 
         this.state = {
-            startingTime: this.props.timeLeft
+            
         };
     };
 
@@ -21,7 +21,7 @@ class Timer extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if(this.props.currentTime < this.state.startingTime) {
+        if(this.props.currentTime < this.props.timeLeft) {
             setTimeout(() => {
                 const currentTime = this.props.currentTime + 100;
                 this.props.setCurrentTime(currentTime);
@@ -30,7 +30,9 @@ class Timer extends React.Component {
 	};
 
     render() {
-        const value = Math.floor((this.props.currentTime / this.state.startingTime) * 100);
+        const value = Math.floor((this.props.currentTime / this.props.timeLeft) * 100);
+
+        if(value === 100) this.props.changeActivity();
 
         return (
         <>
@@ -39,7 +41,6 @@ class Timer extends React.Component {
             indicating
             percent={value} />
 
-            <div>Seconds left: {(this.state.startingTime - this.props.currentTime) / 1000}</div>
         </>
         )
     }
