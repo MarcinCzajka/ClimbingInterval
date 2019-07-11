@@ -27,20 +27,20 @@ class Timer extends React.Component {
 	};
 
     render() {
-        const value = Math.floor((this.props.currentTime / this.props.timeLeft) * 100);
+        //const value = Math.floor((this.props.currentTime / this.props.timeLeft) * 100);
 
         const secondsLeft = Math.ceil((this.props.timeLeft - this.props.currentTime) / 1000);
         const displayTimeLeft = (secondsLeft ? `Seconds left: ${secondsLeft}` : "")
 
         return (
-        <div >
+        <div className={this.props.shouldTimerRender === true ? "visible" : "hidden"}>
             <p>{displayTimeLeft}</p>
 
             <Progress 
-                className={this.props.shouldTimerRender === true ? "visible" : "hidden"}
                 indicating
                 inverted
-                percent={value} 
+                value={this.props.currentTime} 
+                total={this.props.timeLeft}
             >
                 {this.props.climberActivity}
             </Progress>
