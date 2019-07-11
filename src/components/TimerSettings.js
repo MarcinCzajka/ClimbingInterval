@@ -13,13 +13,18 @@ class TimerSettings extends React.Component {
             restMinutes: 2,
             restSeconds: 0,
             cycles: 8,
-            cutRestByPercent: 50
+            reduceRestByPercent: 50,
+            open: false
         };
         
     };
 
+    open = () => this.setState({ open: true })
+    close = () => this.setState({ open: false })
+
     handleSubmit = () => {
-        console.log(this.state)
+        this.close();
+        this.props.handleSubmit(this.state)
     }
 
     handleChange = (e, { name, value }) => this.setState({ [name]: Number(value) })
@@ -27,43 +32,48 @@ class TimerSettings extends React.Component {
     render() {
 
         return (
-            <Modal trigger={<Button>Set default settings</Button>} centered={false} size={'tiny'} >
+            <Modal 
+            open={this.state.open}
+            onClose={this.close}
+            trigger={<Button onClick={this.open} color='blue'>Change settings</Button>} 
+            centered={false} 
+            size={'tiny'} >
                 <Modal.Header>Settings:</Modal.Header>
                 <Modal.Content>
-                    <Form size='small' unstackable widths='equal' onSubmit={this.handleSubmit}>
+                    <Form size='small' unstackable widths="equal" onSubmit={this.handleSubmit}>
                         <Form.Group inline>
                             <Form.Field>
-                                <label>Preparation: </label>
+                                <label >Preparation: </label>
                             </Form.Field>
                             <Form.Field>
-                                <Input name="prepMinutes" placeholder='0 min' type='tel' onChange={this.handleChange}/>
+                                <Input name="prepMinutes" placeholder={this.state.prepMinutes+" min"} type='tel' onChange={this.handleChange}/>
                             </Form.Field>
                             <Form.Field>
-                                <Input name="prepSeconds" placeholder='5 sec' type='tel' onChange={this.handleChange}/>
+                                <Input name="prepSeconds" placeholder={this.state.prepSeconds+" sec"} type='tel' onChange={this.handleChange}/>
                             </Form.Field>
                         </Form.Group>
 
                         <Form.Group inline>
                             <Form.Field>
-                                <label>Climbing: </label>
+                                <label >Climbing: </label>
                             </Form.Field>
                             <Form.Field>
-                                <Input name="climbMinutes" placeholder='2 min' type='tel' onChange={this.handleChange}/>
+                                <Input name="climbMinutes" placeholder={this.state.climbMinutes+" min"} type='tel' onChange={this.handleChange}/>
                             </Form.Field>
                             <Form.Field>
-                                <Input name="climbSeconds" placeholder='0 sec' type='tel' onChange={this.handleChange}/>
+                                <Input name="climbSeconds" placeholder={this.state.climbSeconds+" sec"} type='tel' onChange={this.handleChange}/>
                             </Form.Field>
                         </Form.Group>
 
                         <Form.Group inline>
                             <Form.Field>
-                                <label>Resting: </label>
+                                <label >Resting: </label>
                             </Form.Field>
                             <Form.Field>
-                                <Input name="restMinutes" placeholder='2 min' type='tel' onChange={this.handleChange}/>
+                                <Input name="restMinutes" placeholder={this.state.restMinutes+" min"} type='tel' onChange={this.handleChange}/>
                             </Form.Field>
                             <Form.Field>
-                                <Input name="restSeconds" placeholder='0 sec' type='tel' onChange={this.handleChange}/>
+                                <Input name="restSeconds" placeholder={this.state.restSeconds+" sec"} type='tel' onChange={this.handleChange}/>
                             </Form.Field>
                         </Form.Group>
 
@@ -72,19 +82,19 @@ class TimerSettings extends React.Component {
                                 fluid
                                 name="cycles"
                                 label='Cycles:'
-                                placeholder='8 cycles'
+                                placeholder={this.state.cycles}
                                 onChange={this.handleChange}
                             />
                             <Form.Input
                                 fluid
-                                name="cutRestByPercent"
+                                name="reduceRestByPercent"
                                 label='Cut rest by % each cycle'
-                                placeholder='50%'
+                                placeholder={this.state.reduceRestByPercent+"%"}
                                 onChange={this.handleChange}
                             />
                         </Form.Group>
 
-                        <Button type='submit'>Submit</Button>
+                        <Button type='submit' color='blue'>Submit</Button>
 
                     </Form>
                 </Modal.Content>
