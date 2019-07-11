@@ -5,13 +5,6 @@ import './Timer.css';
 
 
 class Timer extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            
-        };
-    };
 
     componentDidMount() {
         setTimeout(() => {
@@ -21,27 +14,37 @@ class Timer extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if(this.props.currentTime < this.props.timeLeft) {
-            setTimeout(() => {
-                const currentTime = this.props.currentTime + 100;
-                this.props.setCurrentTime(currentTime);
-            }, 100);
-        };
+        if(this.props.shouldTimerRender) {
+            if(this.props.currentTime >= this.props.timeLeft) this.props.changeActivity();
+
+            if(this.props.currentTime < this.props.timeLeft) {
+                setTimeout(() => {
+                    const currentTime = this.props.currentTime + 100;
+                    this.props.setCurrentTime(currentTime);
+                }, 100);
+            };
+        }
 	};
 
     render() {
         const value = Math.floor((this.props.currentTime / this.props.timeLeft) * 100);
 
-        if(value === 100) this.props.changeActivity();
+        const secondsLeft = Math.ceil((this.props.timeLeft - this.props.currentTime) / 1000);
+        const displayTimeLeft = (secondsLeft ? `Seconds left: ${secondsLeft}` : "")
 
         return (
-        <>
-            <Progress 
-            className="bar"
-            indicating
-            percent={value} />
+        <div >
+            <p>{displayTimeLeft}</p>
 
-        </>
+            <Progress 
+                className={this.props.shouldTimerRender === true ? "visible" : "hidden"}
+                indicating
+                inverted
+                percent={value} 
+            >
+                {this.props.climberActivity}
+            </Progress>
+        </div>
         )
     }
 };

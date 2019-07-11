@@ -7,12 +7,13 @@ class App extends React.Component {
         super(props);
 
         this.state = {
-            timeLeft: 1000,
+            timeLeft: 5000,
             currentTime: 0,
             climberActivity: "Prepare",
             activityIndex: 0,
-            endAt: 6,
-            baseRest: 20000
+            endAt: 8,
+            baseRest: 120000,
+            shouldTimerRender: true
         };
         
         this.setCurrentTime = this.setCurrentTime.bind(this);
@@ -22,15 +23,16 @@ class App extends React.Component {
 
 
     render() {
-        const secondsLeft = Math.ceil((this.state.timeLeft - this.state.currentTime) / 1000);
+        
         return (
             <div>
-                <div>{this.state.climberActivity} Seconds left: {secondsLeft}</div>
                 <Timer 
-                    timeLeft={this.state.timeLeft} 
+                    timeLeft={this.state.timeLeft}
                     currentTime={this.state.currentTime}
-                    setCurrentTime={this.setCurrentTime} 
-                    changeActivity={this.changeActivity} />
+                    setCurrentTime={this.setCurrentTime}
+                    climberActivity={this.state.climberActivity}
+                    changeActivity={this.changeActivity}
+                    shouldTimerRender={this.state.shouldTimerRender}/>
             </div>
         );
     };
@@ -44,31 +46,34 @@ class App extends React.Component {
 
         if(this.state.activityIndex + 1 === this.state.endAt) {
             this.setState({
-                timeLeft: 999999999999,
+                timeLeft: false,
                 currentTime: 0,
                 climberActivity: activities[activities.length-1],
-                activityIndex: this.state.activityIndex + 1
+                activityIndex: this.state.activityIndex + 1,
+                shouldTimerRender: false
             });
         }
         else if((this.state.activityIndex + 1) % 2 !== 0) {
             this.setState({
-                timeLeft: 1000,
+                timeLeft: 120000,
                 currentTime: 0,
                 climberActivity: activities[1],
-                activityIndex: this.state.activityIndex + 1
+                activityIndex: this.state.activityIndex + 1,
+                shouldTimerRender: true
             });
         }
         else {
             let restingTime = this.state.baseRest;
-            if(!(this.state.activityIndex + 1 <= 2)) {
-                restingTime = this.state.baseRest / (this.state.activityIndex + 1);
+            if(this.state.activityIndex + 1 > 2) {
+                restingTime = this.state.baseRest / ((this.state.activityIndex + 1) / 2);
             }
 
             this.setState({
                 timeLeft: restingTime,
                 currentTime: 0,
                 climberActivity: activities[2],
-                activityIndex: this.state.activityIndex + 1
+                activityIndex: this.state.activityIndex + 1,
+                shouldTimerRender: true
             });
         };
     };
