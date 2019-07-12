@@ -6,7 +6,7 @@ class CurrentSettingsDisplay extends React.Component {
 
     render() {
         return (
-            <Table color='purple' key='table' inverted textAlign='center' size='large'>
+            <Table color='purple' inverted textAlign='center' size='large'>
                 <Table.Header>
                     <Table.Row>
                         <Table.HeaderCell colSpan='2'>Current settings</Table.HeaderCell>

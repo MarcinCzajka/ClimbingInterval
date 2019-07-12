@@ -13,7 +13,6 @@ class TimerDriver extends React.Component {
             activityIndex: 0,
             endAt: this.props.cycles,
             baseRest: this.props.baseRest * 1000,
-            shouldTimerRender: true,
             open: false
         };
         
@@ -44,7 +43,17 @@ class TimerDriver extends React.Component {
                 onClose={this.close}
                 trigger={<Button onClick={this.resetTimer} color='green' size='massive' fluid circular>Start</Button>}
             >
-                <Modal.Header>Interval</Modal.Header>
+                <Modal.Header>
+                    Interval
+                    <Button 
+                        inverted
+                        circular
+                        color='red'
+                        floated='right'
+                        onClick={this.close}>
+                        Close
+                    </Button>
+                    </Modal.Header>
                 <Modal.Content>
                     <Timer 
                     timeLeft={this.state.timeLeft}
@@ -54,7 +63,6 @@ class TimerDriver extends React.Component {
                     endAt={this.state.endAt}
                     activityIndex={this.state.activityIndex}
                     changeActivity={this.changeActivity}
-                    shouldTimerRender={this.state.shouldTimerRender}
                     />
                 </Modal.Content>
             </Modal>
@@ -79,8 +87,7 @@ class TimerDriver extends React.Component {
                 timeLeft: this.props.timeLeft * 1000,
                 currentTime: 0,
                 climberActivity: activities[1],
-                activityIndex: this.state.activityIndex + 1,
-                shouldTimerRender: true
+                activityIndex: this.state.activityIndex + 1
             });
         }
         else {
@@ -93,8 +100,7 @@ class TimerDriver extends React.Component {
                 timeLeft: restingTime,
                 currentTime: 0,
                 climberActivity: activities[2],
-                activityIndex: this.state.activityIndex + 1,
-                shouldTimerRender: true
+                activityIndex: this.state.activityIndex + 1
             });
         };
     };
