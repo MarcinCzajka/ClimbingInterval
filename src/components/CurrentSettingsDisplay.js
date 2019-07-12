@@ -1,28 +1,37 @@
 import React from 'react';
-import { Form, Label } from "semantic-ui-react";
+import { Container, Table } from "semantic-ui-react";
 
 class CurrentSettingsDisplay extends React.Component {
      
 
     render() {
         return ( 
-            <Form widths="Two">
-                <Form.Group >
-                    <Label>Prepare: </Label><Label>{this.props.prepareTime+" seconds"}</Label>
-                </Form.Group>
+            <Table color='purple' key='table' inverted textAlign='center' style={{width:'500px'}}>
+                <Table.Header>
+                    <Table.Row>
+                        <Table.HeaderCell colSpan='2'>Current settings</Table.HeaderCell>
+                    </Table.Row>
+                </Table.Header>
 
-                <Form.Group>
-                    <Label>Climbing: </Label><Label>{this.props.timeLeft+" seconds"}</Label>
-                </Form.Group>
-                    
-                <Form.Group>
-                    <Label>Resting: </Label><Label>{this.props.baseRest+" seconds"}</Label>
-                </Form.Group>
-                    
-                <Form.Group>
-                    <Label>Cycles: </Label><Label>{this.props.cycles}</Label>
-                </Form.Group>
-            </Form>
+                <Table.Body>
+                    <Table.Row>
+                        <Table.Cell>Prepare:</Table.Cell>
+                        <Table.Cell>{this.props.prepareTime+" seconds"}</Table.Cell>
+                    </Table.Row>
+                    <Table.Row>
+                        <Table.Cell>Climbing:</Table.Cell>
+                        <Table.Cell>{this.props.timeLeft+" seconds"}</Table.Cell>
+                    </Table.Row>
+                    <Table.Row>
+                        <Table.Cell>Resting:</Table.Cell>
+                        <Table.Cell>{this.props.baseRest+" seconds"}</Table.Cell>
+                    </Table.Row>
+                    <Table.Row>
+                        <Table.Cell>Cycles:</Table.Cell>
+                        <Table.Cell>{this.props.cycles / 2 + " cycles"}</Table.Cell>
+                    </Table.Row>
+                </Table.Body>
+            </Table>
         );
     };
 

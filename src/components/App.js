@@ -1,4 +1,5 @@
 import React from 'react';
+import { Container } from "semantic-ui-react";
 import CurrentSettingsDisplay from './CurrentSettingsDisplay';
 import TimerSettings from './TimerSettings';
 import TimerDriver from './TimerDriver';
@@ -13,7 +14,7 @@ class App extends React.Component {
             timeLeft: 120,
             baseRest: 120,
             reduceRestByPercent: 50,
-            cycles: 8
+            cycles: 4 * 2
         };
     };
 
@@ -27,14 +28,14 @@ class App extends React.Component {
             timeLeft: timeLeft,
             baseRest: baseRest,
             reduceRestByPercent: data.reduceRestByPercent,
-            cycles: data.cycles
+            cycles: data.cycles * 2
         });
     };
 
     render() {
         
         return (
-            <div >
+            <Container textAlign='center'>
                 <CurrentSettingsDisplay
                     prepareTime={this.state.prepareTime}
                     timeLeft={this.state.timeLeft}
@@ -50,7 +51,7 @@ class App extends React.Component {
                     reduceRestByPercent={this.state.reduceRestByPercent}
                     cycles={this.state.cycles}>
                 </TimerDriver>
-            </div>
+            </Container>
         );
     };
 

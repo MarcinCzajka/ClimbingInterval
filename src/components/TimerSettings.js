@@ -12,7 +12,7 @@ class TimerSettings extends React.Component {
             climbSeconds: 0,
             restMinutes: 2,
             restSeconds: 0,
-            cycles: 8,
+            cycles: 4,
             reduceRestByPercent: 50,
             open: false
         };
