@@ -50,6 +50,7 @@ class TimerDriver extends React.Component {
                         circular
                         color='red'
                         floated='right'
+                        attached='bottom'
                         onClick={this.close}>
                         Close
                     </Button>
