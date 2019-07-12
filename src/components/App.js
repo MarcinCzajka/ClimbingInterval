@@ -44,6 +44,7 @@ class App extends React.Component {
                     cycles={this.state.cycles}
                 />
                 <TimerSettings handleSubmit={this.handleDataFromSettings}></TimerSettings>
+                <br></br>
                 <TimerDriver
                     prepareTime={this.state.prepareTime}
                     timeLeft={this.state.timeLeft}

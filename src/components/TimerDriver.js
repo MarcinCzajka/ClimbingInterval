@@ -39,10 +39,9 @@ class TimerDriver extends React.Component {
     render() {
         
         return (
-            <Modal 
+            <Modal
                 open={this.state.open}
                 onClose={this.close}
-                dimmer='blurring'
                 trigger={<Button onClick={this.resetTimer} color='green' size='massive' fluid circular>Start</Button>}
             >
                 <Modal.Header>Interval</Modal.Header>
@@ -52,6 +51,8 @@ class TimerDriver extends React.Component {
                     currentTime={this.state.currentTime}
                     setCurrentTime={this.setCurrentTime}
                     climberActivity={this.state.climberActivity}
+                    endAt={this.state.endAt}
+                    activityIndex={this.state.activityIndex}
                     changeActivity={this.changeActivity}
                     shouldTimerRender={this.state.shouldTimerRender}
                     />
@@ -67,6 +68,8 @@ class TimerDriver extends React.Component {
 
     changeActivity = () => {
         const activities = ["Prepare", "Climbing", "Resting", "Finished"];
+        
+        navigator.vibrate(300, 300, 300);
 
         if(this.state.activityIndex + 1 === this.state.endAt) {
             this.close();

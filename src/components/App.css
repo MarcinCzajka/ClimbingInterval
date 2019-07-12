@@ -1,9 +1,33 @@
-#mainContainer {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 50%;
-    margin: auto;
+html {
+  font-size: 16px;
+  height: 100vh;
 }
+
+@media only screen and (min-width: 750px) {
+    #mainContainer {
+        background-color: bisque;
+        position: absolute;
+        top: 10%;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 35%;
+        height: 60%;
+        margin: 0 auto 0 auto;
+        border-radius: 30px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+  }
+
+  @media only screen and (min-width: 600px) {
+    #mainContainer {
+        position: absolute;
+        top: 10%;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 60%;
+        height: 60%;
+        margin: 0 auto 0 auto;
+        border-radius: 30px;}
+  }

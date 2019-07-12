@@ -4,3 +4,10 @@
 .visible {
     display:block;
 }
+
+#timerSecondsDisplay {
+    text-align: center;
+    font-size: 12rem;
+    color: white;
+    background-color: purple;
+}
