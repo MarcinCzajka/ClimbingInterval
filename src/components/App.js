@@ -1,8 +1,8 @@
 import React from 'react';
-import { Container } from "semantic-ui-react";
 import CurrentSettingsDisplay from './CurrentSettingsDisplay';
 import TimerSettings from './TimerSettings';
 import TimerDriver from './TimerDriver';
+import './App.css';
 import "semantic-ui-css/semantic.min.css";
 
 class App extends React.Component {
@@ -35,7 +35,7 @@ class App extends React.Component {
     render() {
         
         return (
-            <Container textAlign='center'>
+            <div id='mainContainer'>
                 <CurrentSettingsDisplay
                     prepareTime={this.state.prepareTime}
                     timeLeft={this.state.timeLeft}
@@ -51,7 +51,8 @@ class App extends React.Component {
                     reduceRestByPercent={this.state.reduceRestByPercent}
                     cycles={this.state.cycles}>
                 </TimerDriver>
-            </Container>
+                
+            </div>
         );
     };
 

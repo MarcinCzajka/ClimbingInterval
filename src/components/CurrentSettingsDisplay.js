@@ -1,12 +1,12 @@
 import React from 'react';
-import { Container, Table } from "semantic-ui-react";
+import { Table } from "semantic-ui-react";
 
 class CurrentSettingsDisplay extends React.Component {
      
 
     render() {
-        return ( 
-            <Table color='purple' key='table' inverted textAlign='center' style={{width:'500px'}}>
+        return (
+            <Table color='purple' key='table' inverted textAlign='center' size='large'>
                 <Table.Header>
                     <Table.Row>
                         <Table.HeaderCell colSpan='2'>Current settings</Table.HeaderCell>

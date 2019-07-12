@@ -35,7 +35,7 @@ class TimerSettings extends React.Component {
             <Modal 
             open={this.state.open}
             onClose={this.close}
-            trigger={<Button onClick={this.open} color='blue'>Change settings</Button>} 
+            trigger={<Button onClick={this.open} basic color='purple' size='massive' fluid circular>Change settings</Button>} 
             centered={false} 
             size={'tiny'} >
                 <Modal.Header>Settings:</Modal.Header>

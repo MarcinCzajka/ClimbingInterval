@@ -43,7 +43,7 @@ class TimerDriver extends React.Component {
                 open={this.state.open}
                 onClose={this.close}
                 dimmer='blurring'
-                trigger={<Button onClick={this.resetTimer} color='green'>Start</Button>}
+                trigger={<Button onClick={this.resetTimer} color='green' size='massive' fluid circular>Start</Button>}
             >
                 <Modal.Header>Interval</Modal.Header>
                 <Modal.Content>
