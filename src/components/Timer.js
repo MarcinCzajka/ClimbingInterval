@@ -1,5 +1,5 @@
 import React from 'react';
-import { Progress, Table } from "semantic-ui-react";
+import { Table } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 import './Timer.css';
 import Beeper from './Beeper';
@@ -13,16 +13,15 @@ class Timer extends React.Component {
 
     componentDidMount() {
         setTimeout(() => {
-            const currentTime = this.props.currentTime + 1000;
+            const currentTime = this.props.currentTime + 500;
             this.props.setCurrentTime(currentTime);
-        }, 1000);
+        }, 500);
     }
 
     componentDidUpdate(prevProps, prevState) {
         const milisecondsLeft = (this.props.timeLeft - this.props.currentTime);
         if(milisecondsLeft <= 0) {
             this.beeper.start(600);
-            navigator.vibrate([300, 300, 300]);
             this.props.changeActivity();
         }
 
@@ -34,9 +33,9 @@ class Timer extends React.Component {
 
         if(this.props.currentTime < this.props.timeLeft) {
             setTimeout(() => {
-                const currentTime = this.props.currentTime + 1000;
+                const currentTime = this.props.currentTime + 500;
                 this.props.setCurrentTime(currentTime);
-            }, 1000);
+            }, 500);
         };
     };
 
@@ -59,14 +58,6 @@ class Timer extends React.Component {
                     </Table.Row>
                 </Table.Body>
             </Table>
-
-            <Progress 
-                indicating
-                inverted
-                value={this.props.currentTime} 
-                total={this.props.timeLeft}
-            >
-            </Progress>
 
             <div 
             id="timerSecondsDisplay" 

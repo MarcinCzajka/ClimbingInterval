@@ -7,8 +7,8 @@ class TimerDriver extends React.Component {
         super(props);
 
         this.state = {
-            timeLeft: this.props.prepareTime * 1000,
-            currentTime: 0,
+            timeLeft: (this.props.prepareTime * 1000) + Date.now(),
+            currentTime: Date.now(),
             climberActivity: "Prepare",
             activityIndex: 0,
             endAt: this.props.cycles,
@@ -78,15 +78,15 @@ class TimerDriver extends React.Component {
     changeActivity = () => {
         const activities = ["Prepare", "Climbing", "Resting", "Finished"];
         
-        navigator.vibrate(300, 300, 300);
+        navigator.vibrate([300, 300, 300]);
 
         if(this.state.activityIndex + 1 === this.state.endAt) {
             this.close();
         }
         else if((this.state.activityIndex + 1) % 2 !== 0) {
             this.setState({
-                timeLeft: this.props.timeLeft * 1000,
-                currentTime: 0,
+                timeLeft: (this.props.timeLeft * 1000) + Date.now(),
+                currentTime: Date.now(),
                 climberActivity: activities[1],
                 activityIndex: this.state.activityIndex + 1
             });
