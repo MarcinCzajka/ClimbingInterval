@@ -24,4 +24,4 @@ class Beeper extends AudioContext{
     }
 }
 
-module.exports = Beeper
+export default Beeper
