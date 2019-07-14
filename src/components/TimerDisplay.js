@@ -5,10 +5,6 @@ import './TimerDisplay.css';
 
 class Timer extends React.Component {
 
-    componentDidUpdate() {
-
-    }
-
     render() {
 
         const colorOfSeconds = (this.props.climberActivity === "Climbing" ? 'red' : '#A333C8')

@@ -82,7 +82,7 @@ class TimerDriver extends React.Component {
     beepAndVibrate = () => {
         if (this.state.secondsLeft <= 0) {
             this.beeper.start(600);
-            navigator.vibrate([150, 150, 200]);
+            navigator.vibrate([50, 50, 300]);
 
             this.changeActivity();
         } else if (this.state.secondsLeft <= 3) {

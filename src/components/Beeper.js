@@ -5,11 +5,9 @@ class Beeper extends AudioContext{
         super();
         
         this.type = 'triangle';
-        this.suspend();
     }
 
     start(duration) {
-        this.resume();
         const oscillator = this.createOscillator();
 
         oscillator.connect(this.destination)
@@ -18,7 +16,8 @@ class Beeper extends AudioContext{
         if (oscillator.start) oscillator.start();
 
         setTimeout(() => {
-            this.suspend();
+            if (oscillator.noteOff) osc.noteOff(0);
+            if (ooscillatorsc.stop) osc.stop();
         }, duration);
 
     }
