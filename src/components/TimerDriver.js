@@ -17,18 +17,28 @@ class TimerDriver extends React.Component {
             climberActivity: "Prepare",
             currentCycleIndex: 0,
             lastCycleIndex: this.props.cycles,
-            open: false
+            open: false,
+            pause: false
         };
     };
 
     componentDidUpdate(prevProps, nextState) {
         if(this.state.open) {
-            if (nextState.secondsLeft !== this.state.secondsLeft) {
-                this.beepAndVibrate();
+            if(!this.state.pause) {
+                if (nextState.secondsLeft !== this.state.secondsLeft) {
+                    this.beepAndVibrate();
+                };
+                this.countdown();
             };
-            console.log(this.state.climberActivity)
-            this.countdown();
         };
+    };
+
+    setPause = () => {
+        this.setState({ 
+            pause: !this.state.pause,
+            endCycleAt: Date.now() - (this.state.secondsLeft * 1000),
+            currentTime: Date.now()
+        });
     };
 
     close = () => this.setState({ open: false });
@@ -42,7 +52,8 @@ class TimerDriver extends React.Component {
             climberActivity: "Prepare",
             currentCycleIndex: 0,
             lastCycleIndex: this.props.cycles,
-            open: true
+            open: true,
+            pause: false
         });
     };
 
@@ -52,7 +63,15 @@ class TimerDriver extends React.Component {
             <Modal
                 open={this.state.open}
                 onClose={this.close}
-                trigger={<Button onClick={this.resetTimer} color='green' size='massive' fluid circular>Start</Button>}
+                trigger={
+                    <Button onClick={this.resetTimer} 
+                        color='green' 
+                        size='massive' 
+                        fluid 
+                        circular>
+                        Start
+                    </Button>
+                }
             >
                 <Modal.Header>
                     Interval
@@ -72,6 +91,7 @@ class TimerDriver extends React.Component {
                     currentCycleIndex={this.state.currentCycleIndex}
                     climberActivity={this.state.climberActivity}
                     secondsLeft={this.state.secondsLeft}
+                    setPause={this.setPause}
                     />
                 </Modal.Content>
             </Modal>
@@ -82,7 +102,7 @@ class TimerDriver extends React.Component {
     beepAndVibrate = () => {
         if (this.state.secondsLeft <= 0) {
             this.beeper.start(600);
-            navigator.vibrate([50, 50, 300]);
+            navigator.vibrate([100, 400]);
 
             this.changeActivity();
         } else if (this.state.secondsLeft <= 3) {

@@ -25,7 +25,8 @@ class Timer extends React.Component {
 
             <div 
             id="timerSecondsDisplay" 
-            style={{backgroundColor:colorOfSeconds}}>
+            style={{backgroundColor:colorOfSeconds}}
+            onClick={this.props.setPause}>
                 {this.props.secondsLeft}
             </div>
             
