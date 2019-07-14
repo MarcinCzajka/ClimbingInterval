@@ -9,15 +9,19 @@ class Beeper extends AudioContext{
 
     start(duration) {
         const oscillator = this.createOscillator();
+        const gainNode = this.createGain();
 
-        oscillator.connect(this.destination)
+        oscillator.connect(gainNode);
+        gainNode.connect(this.destination);
+
+        gainNode.gain.value = 1;
 
         if (oscillator.noteOn) oscillator.noteOn(0);
         if (oscillator.start) oscillator.start();
 
         setTimeout(() => {
-            if (oscillator.noteOff) osc.noteOff(0);
-            if (ooscillatorsc.stop) osc.stop();
+            if (oscillator.noteOff) oscillator.noteOff(0);
+            if (oscillator.stop) oscillator.stop();
         }, duration);
 
     }

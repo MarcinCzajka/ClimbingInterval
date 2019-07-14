@@ -5,7 +5,6 @@ html {
 
 @media only screen and (min-width: 750px) {
     #mainContainer {
-        background-color: bisque;
         position: absolute;
         top: 10%;
         bottom: 0;
@@ -14,7 +13,6 @@ html {
         width: 35%;
         margin: 0 auto 0 auto;
         border-radius: 30px;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
   }
 
@@ -27,5 +25,6 @@ html {
         right: 0;
         width: 60%;
         margin: 0 auto 0 auto;
-        border-radius: 30px;}
+        border-radius: 30px;
+      }
   }
