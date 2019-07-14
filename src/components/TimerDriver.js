@@ -13,10 +13,10 @@ class TimerDriver extends React.Component {
             endCycleAt: Date.now() + (this.props.prepareTime * 1000),
             currentTime: Date.now(),
             secondsLeft: this.props.prepareTime,
+            restingDuration: this.props.initialRestingDuration * 1000,
             climberActivity: "Prepare",
             currentCycleIndex: 0,
             lastCycleIndex: this.props.cycles,
-            initialRestingDuration: this.props.initialRestingDuration * 1000,
             open: false
         };
     };
@@ -26,7 +26,7 @@ class TimerDriver extends React.Component {
             if (nextState.secondsLeft !== this.state.secondsLeft) {
                 this.beepAndVibrate();
             };
-
+            console.log(this.state.climberActivity)
             this.countdown();
         };
     };
@@ -38,10 +38,10 @@ class TimerDriver extends React.Component {
             endCycleAt: Date.now() + (this.props.prepareTime * 1000),
             currentTime: Date.now(),
             secondsLeft: this.props.prepareTime,
+            restingDuration: this.props.initialRestingDuration * 1000,
             climberActivity: "Prepare",
             currentCycleIndex: 0,
             lastCycleIndex: this.props.cycles,
-            initialRestingDuration: this.props.initialRestingDuration * 1000,
             open: true
         });
     };
@@ -106,30 +106,30 @@ class TimerDriver extends React.Component {
         
         navigator.vibrate([100, 100, 100]);
 
-        if(this.state.activityIndex + 1 === this.state.endAt) {
+        if (this.state.currentCycleIndex + 1 === this.state.endAt) {
             this.close();
         }
-        else if((this.state.activityIndex + 1) % 2 !== 0) {
+        else if ((this.state.currentCycleIndex + 1) % 2 !== 0) {
             this.setState({
-                endCycleAt: (this.props.timeLeft * 1000) + Date.now(),
+                endCycleAt: Date.now() + (this.props.timeLeft * 1000),
                 currentTime: Date.now(),
                 secondsLeft: Math.ceil((this.state.endCycleAt - this.state.currentTime) / 1000),
                 climberActivity: activities[1],
-                activityIndex: this.state.activityIndex + 1
+                currentCycleIndex: this.state.currentCycleIndex + 1
             });
         }
         else {
-            let restingTime = this.state.initialRestingDuration;
-            if(this.state.activityIndex + 1 > 2) {
-                restingTime = this.state.initialRestingDuration / ((this.state.activityIndex + 1) * (this.props.reduceRestByPercent || 1));
-            }
+            const restingTime = this.state.restingDuration;
 
+            const futureRest = Math.round(restingTime * ((this.props.reduceRestByPercent / 100) || 1));
 
             this.setState({
-                endCycleAt: restingTime,
-                currentTime: 0,
+                endCycleAt: Date.now() + restingTime,
+                currentTime: Date.now(),
+                secondsLeft: Math.ceil((this.state.endCycleAt - this.state.currentTime) / 1000),
+                restingDuration: futureRest,
                 climberActivity: activities[2],
-                activityIndex: this.state.activityIndex + 1
+                currentCycleIndex: this.state.currentCycleIndex + 1
             });
         };
     };
