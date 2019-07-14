@@ -12,7 +12,7 @@ class App extends React.Component {
         this.state = {
             prepareTime: 5,
             timeLeft: 120,
-            baseRest: 120,
+            initialRestingDuration: 120,
             reduceRestByPercent: 50,
             cycles: 4 * 2
         };
@@ -22,12 +22,12 @@ class App extends React.Component {
     handleDataFromSettings = (data) => {
         const prepareTime = (data.prepMinutes * 60) + data.prepSeconds;
         const timeLeft = (data.climbMinutes * 60) + data.climbSeconds;
-        const baseRest = (data.restMinutes * 60) + data.restSeconds;
+        const initialRestingDuration = (data.restMinutes * 60) + data.restSeconds;
 
         this.setState({
             prepareTime: prepareTime,
             timeLeft: timeLeft,
-            baseRest: baseRest,
+            initialRestingDuration: initialRestingDuration,
             reduceRestByPercent: data.reduceRestByPercent,
             cycles: data.cycles * 2
         });
@@ -40,7 +40,7 @@ class App extends React.Component {
                 <CurrentSettingsDisplay
                     prepareTime={this.state.prepareTime}
                     timeLeft={this.state.timeLeft}
-                    baseRest={this.state.baseRest}
+                    initialRestingDuration={this.state.initialRestingDuration}
                     reduceRestByPercent={this.state.reduceRestByPercent}
                     cycles={this.state.cycles}
                 />
@@ -49,7 +49,7 @@ class App extends React.Component {
                 <TimerDriver
                     prepareTime={this.state.prepareTime}
                     timeLeft={this.state.timeLeft}
-                    baseRest={this.state.baseRest}
+                    initialRestingDuration={this.state.initialRestingDuration}
                     reduceRestByPercent={this.state.reduceRestByPercent}
                     cycles={this.state.cycles}>
                 </TimerDriver>

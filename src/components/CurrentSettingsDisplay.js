@@ -24,7 +24,7 @@ class CurrentSettingsDisplay extends React.Component {
                     </Table.Row>
                     <Table.Row>
                         <Table.Cell>Resting:</Table.Cell>
-                        <Table.Cell>{this.props.baseRest+" seconds"}</Table.Cell>
+                        <Table.Cell>{this.props.initialRestingDuration+" seconds"}</Table.Cell>
                     </Table.Row>
                     <Table.Row>
                         <Table.Cell>Cycles:</Table.Cell>

@@ -1,36 +1,47 @@
 import React from 'react';
-import Timer from './Timer';
+import TimerDisplay from './TimerDisplay';
 import { Modal, Button } from "semantic-ui-react";
+import Beeper from './Beeper';
 
 class TimerDriver extends React.Component {
     constructor(props) {
         super(props);
 
+        this.beeper = new Beeper();
+
         this.state = {
-            timeLeft: (this.props.prepareTime * 1000) + Date.now(),
+            endCycleAt: Date.now() + (this.props.prepareTime * 1000),
             currentTime: Date.now(),
+            secondsLeft: this.props.prepareTime,
             climberActivity: "Prepare",
-            activityIndex: 0,
-            endAt: this.props.cycles,
-            baseRest: this.props.baseRest * 1000,
+            currentCycleIndex: 0,
+            lastCycleIndex: this.props.cycles,
+            initialRestingDuration: this.props.initialRestingDuration * 1000,
             open: false
         };
-        
-        this.setCurrentTime = this.setCurrentTime.bind(this);
-        this.changeActivity = this.changeActivity.bind(this);
     };
 
-    close = () => this.setState({ open: false })
+    componentDidUpdate(prevProps, nextState) {
+        if(this.state.open) {
+            if (nextState.secondsLeft !== this.state.secondsLeft) {
+                this.beepAndVibrate();
+            };
+
+            this.countdown();
+        };
+    };
+
+    close = () => this.setState({ open: false });
 
     resetTimer = () => {
         this.setState({
-            timeLeft: this.props.prepareTime * 1000,
-            currentTime: 0,
+            endCycleAt: Date.now() + (this.props.prepareTime * 1000),
+            currentTime: Date.now(),
+            secondsLeft: this.props.prepareTime,
             climberActivity: "Prepare",
-            activityIndex: 0,
-            endAt: this.props.cycles,
-            baseRest: this.props.baseRest * 1000,
-            shouldTimerRender: true,
+            currentCycleIndex: 0,
+            lastCycleIndex: this.props.cycles,
+            initialRestingDuration: this.props.initialRestingDuration * 1000,
             open: true
         });
     };
@@ -56,14 +67,11 @@ class TimerDriver extends React.Component {
                     </Button>
                     </Modal.Header>
                 <Modal.Content>
-                    <Timer 
-                    timeLeft={this.state.timeLeft}
-                    currentTime={this.state.currentTime}
-                    setCurrentTime={this.setCurrentTime}
+                    <TimerDisplay 
+                    lastCycleIndex={this.state.lastCycleIndex}
+                    currentCycleIndex={this.state.currentCycleIndex}
                     climberActivity={this.state.climberActivity}
-                    endAt={this.state.endAt}
-                    activityIndex={this.state.activityIndex}
-                    changeActivity={this.changeActivity}
+                    secondsLeft={this.state.secondsLeft}
                     />
                 </Modal.Content>
             </Modal>
@@ -71,34 +79,54 @@ class TimerDriver extends React.Component {
         );
     };
 
-    setCurrentTime = (currentTime) => {
-        this.setState({currentTime: currentTime});
+    beepAndVibrate = () => {
+        if (this.state.secondsLeft <= 0) {
+            this.beeper.start(600);
+            navigator.vibrate([150, 150, 200]);
+            this.changeActivity();
+        } else if (this.state.secondsLeft <= 3) {
+            this.beeper.start(250);
+            navigator.vibrate(250);
+        };
     }
+
+    countdown = () => {
+
+        setTimeout(() => {
+            this.setState({
+                currentTime: Date.now(),
+                secondsLeft: Math.ceil((this.state.endCycleAt - this.state.currentTime) / 1000),
+            });
+        }, 500);
+    };
+    
 
     changeActivity = () => {
         const activities = ["Prepare", "Climbing", "Resting", "Finished"];
         
-        navigator.vibrate([300, 300, 300]);
+        navigator.vibrate([100, 100, 100]);
 
         if(this.state.activityIndex + 1 === this.state.endAt) {
             this.close();
         }
         else if((this.state.activityIndex + 1) % 2 !== 0) {
             this.setState({
-                timeLeft: (this.props.timeLeft * 1000) + Date.now(),
+                endCycleAt: (this.props.timeLeft * 1000) + Date.now(),
                 currentTime: Date.now(),
+                secondsLeft: Math.ceil((this.state.endCycleAt - this.state.currentTime) / 1000),
                 climberActivity: activities[1],
                 activityIndex: this.state.activityIndex + 1
             });
         }
         else {
-            let restingTime = this.state.baseRest;
+            let restingTime = this.state.initialRestingDuration;
             if(this.state.activityIndex + 1 > 2) {
-                restingTime = this.state.baseRest / ((this.state.activityIndex + 1) * (this.props.reduceRestByPercent || 1));
+                restingTime = this.state.initialRestingDuration / ((this.state.activityIndex + 1) * (this.props.reduceRestByPercent || 1));
             }
 
+
             this.setState({
-                timeLeft: restingTime,
+                endCycleAt: restingTime,
                 currentTime: 0,
                 climberActivity: activities[2],
                 activityIndex: this.state.activityIndex + 1
