@@ -83,6 +83,7 @@ class TimerDriver extends React.Component {
         if (this.state.secondsLeft <= 0) {
             this.beeper.start(600);
             navigator.vibrate([150, 150, 200]);
+
             this.changeActivity();
         } else if (this.state.secondsLeft <= 3) {
             this.beeper.start(250);
@@ -97,15 +98,13 @@ class TimerDriver extends React.Component {
                 currentTime: Date.now(),
                 secondsLeft: Math.ceil((this.state.endCycleAt - this.state.currentTime) / 1000),
             });
-        }, 500);
+        }, 100);
     };
     
 
     changeActivity = () => {
         const activities = ["Prepare", "Climbing", "Resting", "Finished"];
         
-        navigator.vibrate([100, 100, 100]);
-
         if (this.state.currentCycleIndex + 1 === this.state.endAt) {
             this.close();
         }
