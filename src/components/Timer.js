@@ -2,9 +2,14 @@ import React from 'react';
 import { Progress, Table } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 import './Timer.css';
-
+import Beeper from './Beeper';
 
 class Timer extends React.Component {
+    constructor() {
+        super();
+
+        this.beeper = new Beeper();
+    }
 
     componentDidMount() {
         setTimeout(() => {
@@ -14,16 +19,17 @@ class Timer extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-
         const milisecondsLeft = (this.props.timeLeft - this.props.currentTime);
         if(milisecondsLeft <= 0) {
-            navigator.vibrate(300, 300, 300);
+            this.beeper.start(600);
+            navigator.vibrate([300, 300, 300]);
             this.props.changeActivity();
         }
 
         
         if(milisecondsLeft === 3000 || milisecondsLeft === 2000 || milisecondsLeft === 1000) {
-            navigator.vibrate(350);
+            this.beeper.start(250);
+            navigator.vibrate(250);
         }
 
         if(this.props.currentTime < this.props.timeLeft) {

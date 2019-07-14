@@ -16,6 +16,7 @@ class App extends React.Component {
             reduceRestByPercent: 50,
             cycles: 4 * 2
         };
+        
     };
 
     handleDataFromSettings = (data) => {
