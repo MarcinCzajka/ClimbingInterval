@@ -57,6 +57,62 @@ class TimerDriver extends React.Component {
         });
     };
 
+    beepAndVibrate = () => {
+        if (this.state.secondsLeft <= 0) {
+            this.beeper.start(600);
+            navigator.vibrate(700);
+
+            this.changeActivity();
+        } 
+        else if (this.state.secondsLeft <= 3) {
+            this.beeper.start(250);
+            navigator.vibrate(250);
+        };
+    }
+
+    countdown = () => {
+
+        setTimeout(() => {
+            this.setState({
+                currentTime: Date.now(),
+                secondsLeft: Math.ceil((this.state.endCycleAt - this.state.currentTime) / 1000),
+            });
+        }, 100);
+    };
+    
+
+    changeActivity = () => {
+        console.log(this.state.currentCycleIndex)
+        const activities = ["Prepare", "Climbing", "Resting", "Finished"];
+        
+        if (this.state.currentCycleIndex + 1 === this.state.lastCycleIndex) {
+            this.close();
+        }
+        else if ((this.state.currentCycleIndex + 1) % 2 !== 0) {
+            this.setState({
+                endCycleAt: Date.now() + (this.props.timeLeft * 1000),
+                currentTime: Date.now(),
+                secondsLeft: Math.ceil((this.state.endCycleAt - this.state.currentTime) / 1000),
+                climberActivity: activities[1],
+                currentCycleIndex: this.state.currentCycleIndex + 1
+            });
+        }
+        else {
+            const restingTime = this.state.restingDuration;
+
+            const futureRest = Math.round(restingTime * ((this.props.reduceRestByPercent / 100) || 1));
+
+            this.setState({
+                endCycleAt: Date.now() + restingTime,
+                currentTime: Date.now(),
+                secondsLeft: Math.ceil((this.state.endCycleAt - this.state.currentTime) / 1000),
+                restingDuration: futureRest,
+                climberActivity: activities[2],
+                currentCycleIndex: this.state.currentCycleIndex + 1
+            });
+        };
+    };
+
     render() {
         
         return (
@@ -97,60 +153,6 @@ class TimerDriver extends React.Component {
             </Modal>
                 
         );
-    };
-
-    beepAndVibrate = () => {
-        if (this.state.secondsLeft <= 0) {
-            this.beeper.start(600);
-            navigator.vibrate([100, 400]);
-
-            this.changeActivity();
-        } else if (this.state.secondsLeft <= 3) {
-            this.beeper.start(250);
-            navigator.vibrate(250);
-        };
-    }
-
-    countdown = () => {
-
-        setTimeout(() => {
-            this.setState({
-                currentTime: Date.now(),
-                secondsLeft: Math.ceil((this.state.endCycleAt - this.state.currentTime) / 1000),
-            });
-        }, 100);
-    };
-    
-
-    changeActivity = () => {
-        const activities = ["Prepare", "Climbing", "Resting", "Finished"];
-        
-        if (this.state.currentCycleIndex + 1 === this.state.endAt) {
-            this.close();
-        }
-        else if ((this.state.currentCycleIndex + 1) % 2 !== 0) {
-            this.setState({
-                endCycleAt: Date.now() + (this.props.timeLeft * 1000),
-                currentTime: Date.now(),
-                secondsLeft: Math.ceil((this.state.endCycleAt - this.state.currentTime) / 1000),
-                climberActivity: activities[1],
-                currentCycleIndex: this.state.currentCycleIndex + 1
-            });
-        }
-        else {
-            const restingTime = this.state.restingDuration;
-
-            const futureRest = Math.round(restingTime * ((this.props.reduceRestByPercent / 100) || 1));
-
-            this.setState({
-                endCycleAt: Date.now() + restingTime,
-                currentTime: Date.now(),
-                secondsLeft: Math.ceil((this.state.endCycleAt - this.state.currentTime) / 1000),
-                restingDuration: futureRest,
-                climberActivity: activities[2],
-                currentCycleIndex: this.state.currentCycleIndex + 1
-            });
-        };
     };
 
 };

@@ -15,10 +15,10 @@ class Timer extends React.Component {
             <Table color='purple' key='timerDisplay' inverted textAlign='center' size='large'>
                 <Table.Body>
                     <Table.Row>
-                        <Table.Cell>Cycle:</Table.Cell><Table.Cell>{Math.ceil(this.props.currentCycleIndex/2) || 1}/{this.props.lastCycleIndex/2}</Table.Cell>
+                        <Table.Cell colSpan='3'>Cycle: {Math.ceil(this.props.currentCycleIndex/2) || 1}/{this.props.lastCycleIndex/2}</Table.Cell>
                     </Table.Row>
                     <Table.Row>
-                        <Table.Cell colSpan='2'>{this.props.climberActivity}</Table.Cell>
+                        <Table.Cell colSpan='3'>{this.props.climberActivity}</Table.Cell>
                     </Table.Row>
                 </Table.Body>
             </Table>
