@@ -100,7 +100,7 @@ class TimerDriver extends React.Component {
         else {
             const restingTime = this.state.restingDuration;
 
-            const futureRest = Math.round(restingTime * ((this.props.reduceRestByPercent / 100) || 1));
+            const futureRest = Math.round(restingTime - (restingTime * (this.props.reduceRestByPercent / 100))) || 1;
 
             this.setState({
                 endCycleAt: Date.now() + restingTime,
