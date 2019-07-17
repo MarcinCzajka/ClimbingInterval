@@ -3,7 +3,6 @@ import CurrentSettingsDisplay from './CurrentSettingsDisplay';
 import TimerSettings from './TimerSettings';
 import TimerDriver from './TimerDriver';
 import './App.css';
-import "semantic-ui-css/semantic.min.css";
 
 class App extends React.Component {
     constructor(props) {
