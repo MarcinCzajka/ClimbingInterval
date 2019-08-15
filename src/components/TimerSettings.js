@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Button, Form, Input } from "semantic-ui-react";
+import { Modal, Button, Input, Form } from "semantic-ui-react";
 
 class TimerSettings extends React.Component {
     constructor(props) {
