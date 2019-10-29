@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/Klimb/precache-manifest.1c8b560dac8f2509af71df18ab8d63c9.js"
+  "/Klimb/precache-manifest.b99b7af6bc2b07b7a313c5d7dc85b866.js"
 );
 
 self.addEventListener('message', (event) => {
