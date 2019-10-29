@@ -2,9 +2,7 @@ const AudioContext = window.audioContext || window.AudioContext || window.webkit
 
 class Beeper {
     constructor() {
-        super();
-		
-		this.AudioContext.AudioContext = new AudioContext();
+		this.AudioContext = new AudioContext();
         this.AudioContext.type = 'triangle';
     }
 
