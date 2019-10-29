@@ -2,7 +2,7 @@
   "name": "climbinginterval",
   "version": "1.0.0",
   "private": true,
-  "homepage" : "https://marcinczajka.github.io/Klimb/",
+  "homepage": "https://marcinczajka.github.io/Klimb/",
   "dependencies": {
     "css-loader": "^3.0.0",
     "moment": "^2.24.0",
@@ -18,7 +18,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "npm run build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -34,5 +36,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^2.1.1"
   }
 }
