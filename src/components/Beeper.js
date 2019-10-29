@@ -1,18 +1,19 @@
-const AudioContext = window.audioContext || window.AudioContext || window.webkitAudioContexts
+const AudioContext = window.audioContext || window.AudioContext || window.webkitAudioContexts;
 
-class Beeper extends AudioContext{
+class Beeper {
     constructor() {
         super();
-        
-        this.type = 'triangle';
+		
+		this.AudioContext.AudioContext = new AudioContext();
+        this.AudioContext.type = 'triangle';
     }
 
     start(duration) {
-        const oscillator = this.createOscillator();
-        const gainNode = this.createGain();
+        const oscillator = this.AudioContext.createOscillator();
+        const gainNode = this.AudioContext.createGain();
 
         oscillator.connect(gainNode);
-        gainNode.connect(this.destination);
+        gainNode.connect(this.AudioContext.destination);
 
         gainNode.gain.value = 1;
 
@@ -25,6 +26,6 @@ class Beeper extends AudioContext{
         }, duration);
 
     }
-}
+};
 
 export default Beeper
