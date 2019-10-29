@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "515b4ef5f46d38188605b69a37c46e6a",
+    "revision": "37a1f0b0c70db01d42a2f6ffd595a033",
     "url": "/Klimb/index.html"
   },
   {
-    "revision": "17c4df0926fdc1550419",
+    "revision": "66ed080f5a67c1103cc2",
     "url": "/Klimb/static/css/main.29de404c.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Klimb/static/js/2.b348e9a8.chunk.js"
   },
   {
-    "revision": "17c4df0926fdc1550419",
-    "url": "/Klimb/static/js/main.4cc7dcfe.chunk.js"
+    "revision": "66ed080f5a67c1103cc2",
+    "url": "/Klimb/static/js/main.4035e344.chunk.js"
   },
   {
     "revision": "6387798071a4c7787d4f",

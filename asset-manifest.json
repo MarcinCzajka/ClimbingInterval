@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/Klimb/static/css/main.29de404c.chunk.css",
-    "main.js": "/Klimb/static/js/main.4cc7dcfe.chunk.js",
-    "main.js.map": "/Klimb/static/js/main.4cc7dcfe.chunk.js.map",
+    "main.js": "/Klimb/static/js/main.4035e344.chunk.js",
+    "main.js.map": "/Klimb/static/js/main.4035e344.chunk.js.map",
     "runtime~main.js": "/Klimb/static/js/runtime~main.0dd08a56.js",
     "runtime~main.js.map": "/Klimb/static/js/runtime~main.0dd08a56.js.map",
     "static/js/2.b348e9a8.chunk.js": "/Klimb/static/js/2.b348e9a8.chunk.js",
     "static/js/2.b348e9a8.chunk.js.map": "/Klimb/static/js/2.b348e9a8.chunk.js.map",
     "index.html": "/Klimb/index.html",
-    "precache-manifest.b99b7af6bc2b07b7a313c5d7dc85b866.js": "/Klimb/precache-manifest.b99b7af6bc2b07b7a313c5d7dc85b866.js",
+    "precache-manifest.0d57e94ae5f5b263348a58d4a67d597f.js": "/Klimb/precache-manifest.0d57e94ae5f5b263348a58d4a67d597f.js",
     "service-worker.js": "/Klimb/service-worker.js",
     "static/css/main.29de404c.chunk.css.map": "/Klimb/static/css/main.29de404c.chunk.css.map"
   }
