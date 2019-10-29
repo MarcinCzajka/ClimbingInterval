@@ -1,13 +1,13 @@
 import React from 'react';
 import TimerDisplay from './TimerDisplay';
 import { Modal, Button } from "semantic-ui-react";
-import Beeper from './Beeper';
+//import Beeper from './Beeper';
 
 class TimerDriver extends React.Component {
     constructor(props) {
         super(props);
 
-        this.beeper = new Beeper();
+        //this.beeper = new Beeper();
 
         this.state = {
             endCycleAt: Date.now() + (this.props.prepareTime * 1000),
@@ -59,13 +59,13 @@ class TimerDriver extends React.Component {
 
     beepAndVibrate = () => {
         if (this.state.secondsLeft <= 0) {
-            this.beeper.start(600);
+            //this.beeper.start(600);
             navigator.vibrate(700);
 
             this.changeActivity();
         } 
         else if (this.state.secondsLeft <= 3) {
-            this.beeper.start(250);
+            //this.beeper.start(250);
             navigator.vibrate(250);
         };
     }
