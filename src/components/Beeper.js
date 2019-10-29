@@ -1,4 +1,4 @@
-const AudioContext = window.audioContext || window.AudioContext || window.webkitAudioContext
+const AudioContext = new window.audioContext() || new window.AudioContext() || new window.webkitAudioContext()
 
 class Beeper extends AudioContext{
     constructor() {
