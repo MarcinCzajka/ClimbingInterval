@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "8617e99dba2ef3c885de44fe934d4d53",
+    "revision": "0b014c7a2676b283bdee876ca75783c7",
     "url": "/Klimb/index.html"
   },
   {
