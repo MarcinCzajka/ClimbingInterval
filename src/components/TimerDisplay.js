@@ -8,10 +8,10 @@ class Timer extends React.Component {
 
         let colorOfSeconds = '#A333C8';
 
-        if(this.props.climberActivity === "Climbing") {
-            colorOfSeconds = '#f00';
-        } else if(this.props.isPauseActive) {
+        if(this.props.isPauseActive) {
             colorOfSeconds = '#6ec412';
+        }else if(this.props.climberActivity === "Climbing") {
+            colorOfSeconds = '#f00';
         };
 
         return (
