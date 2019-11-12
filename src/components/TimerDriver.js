@@ -71,7 +71,6 @@ class TimerDriver extends React.Component {
     }
 
     countdown = () => {
-
         setTimeout(() => {
             this.setState({
                 currentTime: Date.now(),
@@ -82,7 +81,6 @@ class TimerDriver extends React.Component {
     
 
     changeActivity = () => {
-        console.log(this.state.currentCycleIndex)
         const activities = ["Prepare", "Climbing", "Resting", "Finished"];
         
         if (this.state.currentCycleIndex + 1 === this.state.lastCycleIndex) {
@@ -140,16 +138,19 @@ class TimerDriver extends React.Component {
                         onClick={this.close}>
                         Close
                     </Button>
-                    </Modal.Header>
+                </Modal.Header>
+
                 <Modal.Content>
                     <TimerDisplay 
-                    lastCycleIndex={this.state.lastCycleIndex}
-                    currentCycleIndex={this.state.currentCycleIndex}
-                    climberActivity={this.state.climberActivity}
-                    secondsLeft={this.state.secondsLeft}
-                    setPause={this.setPause}
+                        lastCycleIndex={this.state.lastCycleIndex}
+                        currentCycleIndex={this.state.currentCycleIndex}
+                        climberActivity={this.state.climberActivity}
+                        secondsLeft={this.state.secondsLeft}
+                        setPause={this.setPause}
+                        isPauseActive={this.state.pause}
                     />
                 </Modal.Content>
+
             </Modal>
                 
         );

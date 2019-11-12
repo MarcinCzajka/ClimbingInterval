@@ -6,7 +6,13 @@ class Timer extends React.Component {
 
     render() {
 
-        const colorOfSeconds = (this.props.climberActivity === "Climbing" ? 'red' : '#A333C8')
+        let colorOfSeconds = '#A333C8';
+
+        if(this.props.climberActivity === "Climbing") {
+            colorOfSeconds = '#f00';
+        } else if(this.props.isPauseActive) {
+            colorOfSeconds = '#6ec412';
+        };
 
         return (
         <div >
@@ -26,7 +32,7 @@ class Timer extends React.Component {
             id="timerSecondsDisplay" 
             style={{backgroundColor:colorOfSeconds}}
             onClick={this.props.setPause}>
-                {this.props.secondsLeft}
+                {Math.abs(this.props.secondsLeft)}
             </div>
             
         </div>
