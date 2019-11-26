@@ -8,9 +8,9 @@ class Timer extends React.Component {
 
         let colorOfSeconds = '#A333C8';
 
-        if(this.props.isPauseActive) {
+        if (this.props.isPauseActive) {
             colorOfSeconds = '#6ec412';
-        }else if(this.props.climberActivity === "Climbing") {
+        } else if(this.props.climberActivity === "Climbing") {
             colorOfSeconds = '#f00';
         };
 
@@ -20,7 +20,9 @@ class Timer extends React.Component {
             <Table color='purple' key='timerDisplay' inverted textAlign='center' size='large'>
                 <Table.Body>
                     <Table.Row>
-                        <Table.Cell colSpan='3'>Cycle: {Math.ceil(this.props.currentCycleIndex/2) || 1}/{this.props.lastCycleIndex/2}</Table.Cell>
+                        <Table.Cell colSpan='3'>
+                            Cycle: {Math.ceil(this.props.currentCycleIndex/2) || 1}/{this.props.lastCycleIndex/2}
+                        </Table.Cell>
                     </Table.Row>
                     <Table.Row>
                         <Table.Cell colSpan='3'>{this.props.climberActivity}</Table.Cell>
@@ -29,9 +31,10 @@ class Timer extends React.Component {
             </Table>
 
             <div 
-            id="timerSecondsDisplay" 
-            style={{backgroundColor:colorOfSeconds}}
-            onClick={this.props.setPause}>
+                id="timerSecondsDisplay" 
+                style={{backgroundColor:colorOfSeconds}}
+                onClick={this.props.setPause} >
+
                 {Math.abs(this.props.secondsLeft)}
             </div>
             
